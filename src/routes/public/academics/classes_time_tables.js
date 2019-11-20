@@ -64,11 +64,27 @@ router.get('/', (req, res) => {
     }
 }
  */
+router.get('/:class_id', (req, res) => {
+  const data = {};
+  data.class_id = req.params.class_id;
+  methods.Academics.classesTimeTablesMethods.getClassesTimeTables(data)
+    .then((model) => {
+      console.log('class data');
+      res.status(200).json({
+        message: 'success',
+        course: model,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'error',
+        err,
+      });
+    });
+});
 
-
-router.post('/', (req, res) => {
+router.post('/:', (req, res) => {
   const info = {};
-
   info.class_id = req.body.classId;
   info.day = req.body.day;
   info.time_slot_id = req.body.timeSlotId;

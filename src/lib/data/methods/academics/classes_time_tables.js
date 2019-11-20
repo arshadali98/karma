@@ -29,6 +29,28 @@ classesTimeTablesMethods.getAllClassesTimeTables = () => new Promise((resolve,
       reject(err);
     });
 });
+
+classesTimeTablesMethods.getClassesTimeTables = data => new Promise((
+  resolve, reject,
+) => {
+  console.log(data);
+  class_id = data.class_id;
+  console.log('getClassesTimeTables');
+  models.academics.classes_time_tables.findAll({
+    where: {
+      class_id,
+    },
+  }).then((timeTable) => {
+    console.log(timeTable);
+    resolve(timeTable);
+  })
+    .catch((err) => {
+      console.log(err);
+      reject(err);
+    });
+});
+
+
 classesTimeTablesMethods.updateClassesTimeTablesWithClassNameAndDivision = (
   info,
   data,
